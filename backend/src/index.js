@@ -16,6 +16,9 @@ app.use(cors()); // enable CORS
 
 app.use('/api/users', userRoutes); // use the user routes   
 
+app.use('/api/posts', authenticateToken, postRoutes); // Protect the post routes with the authenticateToken middleware
+app.use('/api/comments', authenticateToken, commentRoutes); // Protect the comment routes with the authenticateToken middleware
+
 
 // User Registration
 app.post('/register', async (req, res) => { // Route for user registration
@@ -31,7 +34,7 @@ app.post('/register', async (req, res) => { // Route for user registration
             password // password
         }
     })
-    res,json(user); // Return the created user
+    res.json(user); // Return the created user
 });
 
 

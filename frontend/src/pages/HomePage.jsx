@@ -6,9 +6,10 @@
 
 import React, { useEffect, useState} from "react";
 import PostGrid from "../components/PostGrid";
+import CreatePost from "../components/CreatePost";
 import { response } from "express";
 
-const HomePage = () => {
+const HomePage = ({ token }) => {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
@@ -20,6 +21,7 @@ const HomePage = () => {
     return (
         <div>
             <h1>Home Page</h1>
+            <CreatePost token={token} />
             <PostGrid posts={posts} />
         </div>
     );

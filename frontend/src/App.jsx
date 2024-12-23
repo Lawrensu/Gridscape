@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
+import Login from './components/Login';
+import Register from './components/Register';
 
 const App = () => {
+  const [token, setToken] = useState(null);
+
   return (  
-    <div className="App">
-      <HomePage />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<Login setToken={setToken} />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </Router>
   );
 };
 

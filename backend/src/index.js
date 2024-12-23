@@ -5,14 +5,17 @@ const bodyParser = require('body-parser'); // for parsing incoming request bodie
 const cors = require('cors'); // for enabling CORS (Cross-Origin Resource Sharing)
 const { PrismaClient } = require('@prisma/client'); // for interacting with the database
 const jwt = require('jsonwebtoken'); // for creating and verifying JWTs
-const userRoutes = require('./routes/userRoutes'); // for user routes
-const authenticateToken = require('./middleware/authenticateToken'); // for authenticating requests
+const userRoutes = require('./routes/userRoutes');
+const postRoutes = require('./routes/postRoutes'); // Import post routes
+const commentRoutes = require('./routes/commentRoutes'); // Import comment routes
+const authenticateToken = require('./middleware/auth.js'); // for authenticating requests
 
 const app = express(); // create the server
 const prisma = new PrismaClient(); // instantiate the Prisma client
 
 app.use(bodyParser.json()); // parse incoming request bodies as JSON
 app.use(cors()); // enable CORS
+
 
 app.use('/api/users', userRoutes); // use the user routes   
 

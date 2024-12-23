@@ -1,4 +1,5 @@
 //  component to display grid of posts
+// display posts and comments
 
 import React from 'react';
 

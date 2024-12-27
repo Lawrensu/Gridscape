@@ -1,4 +1,3 @@
-// filepath: /d:/Projects/Gridscape/Gridscape/backend/src/routes/adminRoutes.js
 const express = require('express');
 const router = express.Router();
 const { PrismaClient } = require('@prisma/client');
@@ -26,6 +25,18 @@ router.delete('/users/:id', async (req, res) => {
   const { id } = req.params;
   await prisma.user.delete({ where: { id: parseInt(id) } });
   res.send('User deleted');
+});
+
+router.delete('/posts/:id', async (req, res) => {
+  const { id } = req.params;
+  await prisma.post.delete({ where: { id: parseInt(id) } });
+  res.send('Post deleted');
+});
+
+router.delete('/comments/:id', async (req, res) => {
+  const { id } = req.params;
+  await prisma.comment.delete({ where: { id: parseInt(id) } });
+  res.send('Comment deleted');
 });
 
 module.exports = router;

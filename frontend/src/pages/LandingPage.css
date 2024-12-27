@@ -1,0 +1,41 @@
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    text-align: center;
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
+  
+  .landing-page.fade-out {
+    opacity: 0;
+  }
+  
+  .landing-page h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .landing-page p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .landing-page button {
+    padding: 1rem 2rem;
+    font-size: 1.25rem;
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.25s;
+  }
+  
+  .landing-page button:hover {
+    background-color: var(--highlight-color);
+  }

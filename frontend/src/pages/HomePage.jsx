@@ -1,35 +1,50 @@
-// Desc: Home page component that fetches posts from the backend and displays them in a grid
-// using the PostGrid component. The PostGrid component is imported and used to display
-// the posts in a grid format. The posts are fetched from the backend using the fetch API
-// and stored in the state using the useState hook. The useEffect hook is used to fetch the
-// posts when the component mounts. The posts are then passed as a prop to the PostGrid
-
-// In a nutshell
-// fetches and displays posts and includes the CreatePost component if the user is authenticated
-
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import PostGrid from "../components/PostGrid";
 import CreatePost from "../components/CreatePost";
+import Loading from "../components/Loading";
 import './HomePage.css';
 
 const HomePage = ({ token }) => {
-    const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showContent, setShowContent] = useState(false);
 
-    useEffect(() => { // Fetch posts from the backends when the component mounts
-        fetch("http://localhost:3000/api/posts")
-            .then(response => response.json())
-            .then(data => setPosts(data));
-    }, []);
+  useEffect(() => {
+    fetch("http://localhost:3000/api/posts")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setPosts(data);
+        setLoading(false);
+        setTimeout(() => setShowContent(true), 500);
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        setLoading(false);
+      });
+  }, []);
 
-    console.log('HomePage component rendered');
+  console.log('HomePage component rendered');
 
-    return (
-        <div>
-            <h1>Home Page</h1>
-            <CreatePost token={token} /> 
-            <PostGrid posts={posts} /> 
-        </div>
-    );
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (!showContent) {
+    return null;
+  }
+
+  return (
+    <div className="homepage">
+      <h1>Home Page</h1>
+      {token && <CreatePost token={token} />}
+      <PostGrid posts={posts} token={token} />
+    </div>
+  );
 };
 
 export default HomePage;

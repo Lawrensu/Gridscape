@@ -1,4 +1,3 @@
-// filepath: /d:/Projects/Gridscape/Gridscape/frontend/src/App.jsx
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
@@ -7,18 +6,23 @@ import Register from './components/Register';
 import Navigation from './components/Navigation';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminDashboard from './components/AdminDashboard';
+import LandingPage from './pages/LandingPage';
 
 const App = () => {
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
-  console.log('App rendered');
+  const handleSetToken = (newToken) => {
+    setToken(newToken);
+    localStorage.setItem('token', newToken);
+  };
 
   return (
     <Router>
-      <Navigation token={token} setToken={setToken} />
+      <Navigation token={token} setToken={handleSetToken} />
       <Routes>
-        <Route path="/" element={<HomePage token={token} />} />
-        <Route path="/login" element={<Login setToken={setToken} />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<HomePage token={token} />} />
+        <Route path="/login" element={<Login setToken={handleSetToken} />} />
         <Route path="/register" element={<Register />} />
         <Route
           path="/admin"

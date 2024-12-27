@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken'); // Import the JWT library
 
 // User Registration
 const registerUser = async (req, res) => { // Route for user registration
-    const { email, password, secretCode } = req.body; // Get the email, password, and secret code from the request body
+    const { email, password, secretCode, role } = req.body; // Get the email, password, and secret code from the request body
 
     if (secretCode !== process.env.SECRET_CODE) { // Check if the secret code is valid
         return res.status(401).send('Invalid secret code'); // If the secret code is invalid, return 401 (Unauthorized)
@@ -17,8 +17,9 @@ const registerUser = async (req, res) => { // Route for user registration
     const user = await prisma.user.create({ // Create a new user
         data: { // with the following data
             email, // email
-            password // password
-        } 
+            password, // password
+            role: role || 'user',
+        },
     });
     res.json(user); // Return the created user
 };

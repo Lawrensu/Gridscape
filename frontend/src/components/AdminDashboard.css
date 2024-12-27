@@ -1,0 +1,50 @@
+.admin-dashboard {
+    padding: 2rem;
+    width: 100%;
+    max-width: 75rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .admin-dashboard h2 {
+    margin-bottom: 2rem;
+    color: var(--accent-color);
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+  }
+  
+  th, td {
+    padding: 1rem;
+    border: 0.0625rem solid var(--highlight-color);
+    text-align: left;
+    color: var(--text-color);
+  }
+  
+  th {
+    background-color: var(--secondary-color);
+  }
+  
+  td {
+    background-color: var(--background-color);
+  }
+  
+  button {
+    margin-right: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    cursor: pointer;
+    transition: background-color 0.25s;
+  }
+  
+  button:hover {
+    background-color: var(--highlight-color);
+  }

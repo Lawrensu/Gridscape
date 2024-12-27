@@ -1,5 +1,7 @@
 const { PrismaClient } = require('@prisma/client'); // Import the Prisma client
 const prisma = new PrismaClient(); // Instantiate the Prisma client
+const multer = require('multer'); // Import the multer package
+const upload = multer({ dest: 'uploads/' }); // Create an upload middleware
 
 const createPost = async (req, res) => { // Route for creating a new post
     const { title, content } = req.body; // Get the title and content from the request body
@@ -7,6 +9,7 @@ const createPost = async (req, res) => { // Route for creating a new post
         data: { // with the following data
             title, 
             content,
+            filePath: file.path, // Set the file path to the path of the uploaded file
             authorId: req.user.userId
         }
     });

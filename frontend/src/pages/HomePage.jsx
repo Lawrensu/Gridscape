@@ -4,25 +4,30 @@
 // and stored in the state using the useState hook. The useEffect hook is used to fetch the
 // posts when the component mounts. The posts are then passed as a prop to the PostGrid
 
+// In a nutshell
+// fetches and displays posts and includes the CreatePost component if the user is authenticated
+
 import React, { useEffect, useState} from "react";
 import PostGrid from "../components/PostGrid";
 import CreatePost from "../components/CreatePost";
-import { response } from "express";
+import './HomePage.css';
 
 const HomePage = ({ token }) => {
     const [posts, setPosts] = useState([]);
 
-    useEffect(() => {
+    useEffect(() => { // Fetch posts from the backends when the component mounts
         fetch("http://localhost:3000/api/posts")
             .then(response => response.json())
             .then(data => setPosts(data));
     }, []);
 
+    console.log('HomePage component rendered');
+
     return (
         <div>
             <h1>Home Page</h1>
-            <CreatePost token={token} />
-            <PostGrid posts={posts} />
+            <CreatePost token={token} /> 
+            <PostGrid posts={posts} /> 
         </div>
     );
 };

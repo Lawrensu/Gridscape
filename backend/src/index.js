@@ -9,6 +9,7 @@ const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes'); // Import post routes
 const commentRoutes = require('./routes/commentRoutes'); // Import comment routes
 const authenticateToken = require('./middleware/auth.js'); // for authenticating requests
+const adminMiddleware = require('./middleware/adminMiddleware'); // for authorizing requests
 
 const app = express(); // create the server
 const prisma = new PrismaClient(); // instantiate the Prisma client
@@ -19,8 +20,10 @@ app.use(cors()); // enable CORS
 
 app.use('/api/users', userRoutes); // use the user routes   
 
+app.use('/uploads', express.static('uploads')); // Serve the uploads directory as a static directory
 app.use('/api/posts', authenticateToken, postRoutes); // Protect the post routes with the authenticateToken middleware
 app.use('/api/comments', authenticateToken, commentRoutes); // Protect the comment routes with the authenticateToken middleware
+app.use('/api/admin', authenticateToken, adminMiddleware, adminRoutes); // Protect the admin routes with the authenticateToken and adminMiddleware middleware
 
 
 // User Registration

@@ -1,13 +1,14 @@
-//  component to display grid of posts
+// component to display grid of posts
 // display posts and comments
 
 import React, { useEffect } from 'react';
 import CreateComment from './CreateComment';
+import './PostGrid.css';
 
 const PostGrid = ({ posts, token }) => {
     const [comments, setComments] = React.useState({});
 
-    useEffect(() => {
+    useEffect(() => { // fetches comments from the backend when the component mounts
         fetch('http://localhost:3000/api/comments')
             .then(response => response.json())
             .then(data => setComments(data));
@@ -24,6 +25,8 @@ const PostGrid = ({ posts, token }) => {
 
                     <div className='comments'>
                         <h3>Comments:</h3>
+
+                        // Filters comments to display only those related to the current post
                         {comments.filter(comment => comment.postId === post.id).map(comment => (
                             <div key={comment.id} className='comment'>
                                 <p>{comment.content}</p>

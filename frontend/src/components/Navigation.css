@@ -1,32 +1,35 @@
 .navigation {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
     background-color: var(--secondary-color);
     color: var(--text-color);
-    width: 96vw;
+    width: 100vw;
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
   }
   
   .nav-left, .nav-right {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     text-align: left;
-    width: 25vw;
+    padding: 0 4rem;
+    flex: 1;
   }
   
   .nav-center {
     display: flex;
     justify-content: center;
-    flex-grow: 1;
+    flex: 1;
   }
   
   .nav-link {
+    display: inline-block;
     color: var(--text-color);
     text-decoration: none;
     font-weight: bold;
     transition: color 0.25s;
+    margin-right: 1rem;
   }
   
   .nav-link:hover {

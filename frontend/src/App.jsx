@@ -7,7 +7,8 @@ import Navigation from './components/Navigation';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminDashboard from './components/AdminDashboard';
 import LandingPage from './pages/LandingPage';
-import SuccessPage from './pages/SuccessPage'; // Import the SuccessPage component
+import SuccessPage from './pages/SuccessPage';
+import ConfirmationPage from './pages/ConfirmationPage'; // Import the ConfirmationPage component
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -25,7 +26,8 @@ const App = () => {
         <Route path="/home" element={<HomePage token={token} />} />
         <Route path="/login" element={<Login setToken={handleSetToken} />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/success" element={<SuccessPage />} /> 
+        <Route path="/success" element={<SuccessPage />} />
+        <Route path="/confirm/:token" element={<ConfirmationPage />} /> {/* Add the ConfirmationPage route */}
         <Route
           path="/admin"
           element={

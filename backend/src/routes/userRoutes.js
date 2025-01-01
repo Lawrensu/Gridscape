@@ -1,9 +1,9 @@
-// Initialize express router
-const express = require('express'); // Import the express library
-const { registerUser, loginUser } = require('../controllers/userController'); // Import the user controller
-const router = express.Router(); // Create a new router
+const express = require('express');
+const { registerUser, loginUser, confirmEmail } = require('../controllers/userController');
+const router = express.Router();
 
-router.post('/register', registerUser); // Route for user registration
-router.post('/login', loginUser); // Route for user login
+router.post('/register', registerUser);
+router.post('/login', loginUser);
+router.get('/confirm/:token', confirmEmail); 
 
 module.exports = router;

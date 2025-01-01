@@ -40,7 +40,7 @@ const HomePage = ({ token }) => {
 
   return (
     <div className="homepage">
-      <h1>Home Page</h1>
+      <h1>Gridscape</h1>
       {token && <CreatePost token={token} />}
       <PostGrid posts={posts} token={token} />
     </div>
